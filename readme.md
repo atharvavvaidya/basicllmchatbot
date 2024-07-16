@@ -1,0 +1,1 @@
+This is a basic chat bot using Gemini Pro which gives quick and fast responses compared to local llms
