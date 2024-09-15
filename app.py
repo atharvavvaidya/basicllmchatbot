@@ -25,8 +25,8 @@ def save_history(question, response):
     """Saves question and response in session state."""
     if "history" not in st.session_state:
         st.session_state.history = []
-    # Insert the new question-response pair at the start of the history list (for reverse order)
-    st.session_state.history.insert(0, {"question": question, "response": response})
+    # Append the new question-response pair to the history list
+    st.session_state.history.append({"question": question, "response": response})
 
 def read_pdf(file):
     """Reads and extracts text from a PDF file."""
@@ -67,6 +67,7 @@ if submit:
 # Display the history of previous questions and responses
 if "history" in st.session_state:
     st.subheader("History of Questions")
-    for i, item in enumerate(st.session_state.history, 1):
+    # Display history in reverse order while keeping the same numbering
+    for i, item in enumerate(reversed(st.session_state.history), 1):
         st.write(f"**Question {i}:** {item['question']}")
         st.write(f"**Response {i}:** {item['response']}")
