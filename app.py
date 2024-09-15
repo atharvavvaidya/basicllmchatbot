@@ -43,6 +43,19 @@ def read_pdf(file):
 st.set_page_config(page_title="Q&A Demo with PDF Reader")
 st.header("DREJ: The Chat Bot")
 
+# Apply custom CSS for the sidebar
+st.markdown(
+    """
+    <style>
+    /* Sidebar background styling */
+    [data-testid="stSidebar"] {
+        background-image: linear-gradient(#122D5C,#122D5C);  /* Gradient background */
+        color: white;  /* White text color */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
 # Initialize state variables
 if "history" not in st.session_state:
