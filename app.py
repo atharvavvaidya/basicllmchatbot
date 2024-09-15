@@ -78,10 +78,14 @@ with st.form(key='question_form'):
         else:
             st.warning("The input cannot be empty. Please enter a question.")
 
-# Display the history of previous questions and responses
-if "history" in st.session_state:
+# Sidebar for history of questions and responses
+with st.sidebar:
     st.subheader("History of Questions")
-    history = st.session_state.history
-    for i, item in enumerate(reversed(history), 1):
-        st.write(f"**Question {len(history) - i + 1}:** {item['question']}")
-        st.write(f"**Response {len(history) - i + 1}:** {item['response']}")
+    if "history" in st.session_state and st.session_state.history:
+        history = st.session_state.history
+        for i, item in enumerate(reversed(history), 1):
+            st.write(f"**Question {len(history) - i + 1}:** {item['question']}")
+            st.write(f"**Response {len(history) - i + 1}:** {item['response']}")
+    else:
+        st.write("No history available.")
+
