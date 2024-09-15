@@ -43,22 +43,6 @@ def read_pdf(file):
 st.set_page_config(page_title="Q&A Demo with PDF Reader")
 st.header("DREJ: The Chat Bot")
 
-# Inject custom CSS to change the sidebar background color
-st.markdown(
-    """
-    <style>
-    /* Change the background color of the sidebar */
-    .css-1d391kg {
-        background-color: ##112C5B;  
-    }
-    /* Change the color of the text in the sidebar */
-    .css-1d391kg .css-18e3p8x {
-        color: #333;  /* Dark gray text */
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
 # Initialize state variables
 if "history" not in st.session_state:
