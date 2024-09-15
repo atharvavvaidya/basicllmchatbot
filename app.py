@@ -42,18 +42,20 @@ def read_pdf(file):
 st.set_page_config(page_title="Q&A Demo with PDF Reader")
 st.header("LLM Application")
 
+ # Display first 500 characters of the PDF text
+
+# Input field and button
+input = st.text_input("Input your question: ", key="input")
+submit = st.button("Ask the Question")
+
 # PDF uploader section
 uploaded_pdf = st.file_uploader("Upload a PDF", type="pdf")
 pdf_text = None
 if uploaded_pdf:
     pdf_text = read_pdf(uploaded_pdf)
     st.subheader("Extracted Text from PDF")
-    st.write(pdf_text[:500])  # Display first 500 characters of the PDF text
-
-# Input field and button
-input = st.text_input("Input your question: ", key="input")
-submit = st.button("Ask the Question")
-
+    st.write(pdf_text[:500]) 
+    
 # Ensure input is not empty before generating response
 if submit:
     if input.strip():  # Check if input is not empty or just spaces
