@@ -50,10 +50,7 @@ if "first_question_asked" not in st.session_state:
     st.session_state.first_question_asked = False
 
 # PDF uploader section
-uploaded_pdf = st.file_uploader("Upload a PDF", type="pdf")
-pdf_text = None
-if uploaded_pdf:
-    pdf_text = read_pdf(uploaded_pdf)
+
 
 # Form to handle input submission with Enter key
 with st.form(key='question_form'):
@@ -77,6 +74,11 @@ with st.form(key='question_form'):
 
         else:
             st.warning("The input cannot be empty. Please enter a question.")
+
+uploaded_pdf = st.file_uploader("Upload a PDF", type="pdf")
+pdf_text = None
+if uploaded_pdf:
+    pdf_text = read_pdf(uploaded_pdf)
 
 # Sidebar for history of questions and responses
 with st.sidebar:
