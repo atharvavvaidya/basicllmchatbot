@@ -25,7 +25,7 @@ def save_history(question, response):
     """Saves question and response in session state."""
     if "history" not in st.session_state:
         st.session_state.history = []
-    # Append the new question-response pair to the history list
+    # Append the question-response pair to the history
     st.session_state.history.append({"question": question, "response": response})
 
 def read_pdf(file):
@@ -40,9 +40,7 @@ def read_pdf(file):
 
 # Streamlit app configuration
 st.set_page_config(page_title="Q&A Demo with PDF Reader")
-st.header("LLM Application")
-
- # Display first 500 characters of the PDF text
+st.header("Godrej Chat Bot")
 
 # Input field and button
 input = st.text_input("Input your question: ", key="input")
@@ -54,8 +52,8 @@ pdf_text = None
 if uploaded_pdf:
     pdf_text = read_pdf(uploaded_pdf)
     st.subheader("Extracted Text from PDF")
-    st.write(pdf_text[:500]) 
-    
+    st.write(pdf_text[:500])  # Display first 500 characters of the PDF text
+
 # Ensure input is not empty before generating response
 if submit:
     if input.strip():  # Check if input is not empty or just spaces
@@ -69,7 +67,8 @@ if submit:
 # Display the history of previous questions and responses
 if "history" in st.session_state:
     st.subheader("History of Questions")
-    # Display history in reverse order while keeping the same numbering
-    for i, item in enumerate(reversed(st.session_state.history), 1):
-        st.write(f"**Question {i}:** {item['question']}")
-        st.write(f"**Response {i}:** {item['response']}")
+    # Display history in reverse order while keeping the original numbering
+    history = st.session_state.history
+    for i, item in enumerate(reversed(history), 1):
+        st.write(f"**Question {len(history) - i + 1}:** {item['question']}")
+        st.write(f"**Response {len(history) - i + 1}:** {item['response']}")
