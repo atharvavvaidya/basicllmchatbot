@@ -80,7 +80,7 @@ with st.form(key='question_form'):
 
 # Sidebar with an image
 with st.sidebar:
-    st.image("/workspaces/basicllmchatbot/DREJLOGO.png", use_column_width=True)  # Replace with the path to your image
+    st.image("DREJLOGO.png", use_column_width=True)  # Replace with the path to your image
     st.subheader("History of Questions")
     if "history" in st.session_state and st.session_state.history:
         history = st.session_state.history
