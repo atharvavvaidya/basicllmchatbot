@@ -42,26 +42,23 @@ def read_pdf(file):
 st.set_page_config(page_title="Q&A Demo with PDF Reader")
 st.header("Godrej Chat Bot")
 
-# Input field and button
-input = st.text_input("Input your question: ", key="input")
-submit = st.button("Ask the Question")
-
 # PDF uploader section
 uploaded_pdf = st.file_uploader("Upload a PDF", type="pdf")
 pdf_text = None
 if uploaded_pdf:
-    pdf_text = read_pdf(uploaded_pdf)
-    st.subheader("Extracted Text from PDF")
-    st.write(pdf_text[:500])  # Display first 500 characters of the PDF text
+    pdf_text = read_pdf(uploaded_pdf)  
 
-# Ensure input is not empty before generating response
-if submit:
-    if input.strip():  # Check if input is not empty or just spaces
-        response = get_gemini_response(input, context=pdf_text)
-        save_history(input, response)
+# Form to handle input submission with Enter key
+with st.form(key='question_form'):
+    input_text = st.text_input("Input your question: ", key="input")
+    submit_button = st.form_submit_button("Ask the Question")
+
+    if submit_button and input_text.strip():  # Check if input is not empty or just spaces
+        response = get_gemini_response(input_text, context=pdf_text)
+        save_history(input_text, response)
         st.subheader("The response is")
         st.write(response)
-    else:
+    elif submit_button:
         st.warning("The input cannot be empty. Please enter a question.")
 
 # Display the history of previous questions and responses
