@@ -50,7 +50,10 @@ if "first_question_asked" not in st.session_state:
     st.session_state.first_question_asked = False
 
 # PDF uploader section
-
+uploaded_pdf = st.file_uploader("Upload a PDF", type="pdf")
+pdf_text = None
+if uploaded_pdf:
+    pdf_text = read_pdf(uploaded_pdf)
 
 # Form to handle input submission with Enter key
 with st.form(key='question_form'):
@@ -75,13 +78,9 @@ with st.form(key='question_form'):
         else:
             st.warning("The input cannot be empty. Please enter a question.")
 
-uploaded_pdf = st.file_uploader("Upload a PDF", type="pdf")
-pdf_text = None
-if uploaded_pdf:
-    pdf_text = read_pdf(uploaded_pdf)
-
-# Sidebar for history of questions and responses
+# Sidebar with an image
 with st.sidebar:
+    st.image("/workspaces/basicllmchatbot/DREJLOGO.png", use_column_width=True)  # Replace with the path to your image
     st.subheader("History of Questions")
     if "history" in st.session_state and st.session_state.history:
         history = st.session_state.history
@@ -90,4 +89,3 @@ with st.sidebar:
             st.write(f"**Response {len(history) - i + 1}:** {item['response']}")
     else:
         st.write("No history available.")
-
