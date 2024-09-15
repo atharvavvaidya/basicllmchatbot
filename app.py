@@ -43,6 +43,23 @@ def read_pdf(file):
 st.set_page_config(page_title="Q&A Demo with PDF Reader")
 st.header("DREJ: The Chat Bot")
 
+# Inject custom CSS to change the sidebar background color
+st.markdown(
+    """
+    <style>
+    /* Change the background color of the sidebar */
+    .css-1d391kg {
+        background-color: ##112C5B;  
+    }
+    /* Change the color of the text in the sidebar */
+    .css-1d391kg .css-18e3p8x {
+        color: #333;  /* Dark gray text */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Initialize state variables
 if "history" not in st.session_state:
     st.session_state.history = []
@@ -80,7 +97,11 @@ with st.form(key='question_form'):
 
 # Sidebar with an image
 with st.sidebar:
-    st.image("DREJLOGO.png", use_column_width=False, width=150)  # Replace with the path to your image
+    try:
+        st.image("path_to_your_image.png", use_column_width=False, width=150)  # Adjust width as needed
+    except Exception as e:
+        st.error(f"Error displaying image: {e}")
+
     st.subheader("History of Questions")
     if "history" in st.session_state and st.session_state.history:
         history = st.session_state.history
