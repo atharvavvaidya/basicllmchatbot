@@ -40,7 +40,7 @@ def read_pdf(file):
 
 # Streamlit app configuration
 st.set_page_config(page_title="Q&A Demo with PDF Reader")
-st.header("Godrej Chat Bot")
+st.header("DREJ: The Chat Bot")
 
 # Initialize state variables
 if "history" not in st.session_state:
