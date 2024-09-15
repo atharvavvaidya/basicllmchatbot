@@ -42,6 +42,12 @@ def read_pdf(file):
 st.set_page_config(page_title="Q&A Demo with PDF Reader")
 st.header("Godrej Chat Bot")
 
+# Initialize state variables
+if "history" not in st.session_state:
+    st.session_state.history = []
+if "first_question_asked" not in st.session_state:
+    st.session_state.first_question_asked = False
+
 # PDF uploader section
 uploaded_pdf = st.file_uploader("Upload a PDF", type="pdf")
 pdf_text = None
@@ -57,9 +63,16 @@ with st.form(key='question_form'):
         response = get_gemini_response(input_text, context=pdf_text)
         st.subheader("The response is")
         st.write(response)
-        # Only save to history if a new response has been generated
-        if response:
-            save_history(input_text, response)
+
+        # Add the first question to history only if it is not the first question
+        if st.session_state.first_question_asked:
+            save_history(st.session_state.first_question, st.session_state.first_response)
+
+        # Save the current question and response
+        st.session_state.first_question_asked = True
+        st.session_state.first_question = input_text
+        st.session_state.first_response = response
+
     elif submit_button:
         st.warning("The input cannot be empty. Please enter a question.")
 
