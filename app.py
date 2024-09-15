@@ -25,8 +25,8 @@ def save_history(question, response):
     """Saves question and response in session state."""
     if "history" not in st.session_state:
         st.session_state.history = []
-    # Append the question-response pair to the history
-    st.session_state.history.append({"question": question, "response": response})
+    # Insert the new question-response pair at the start of the history list (for reverse order)
+    st.session_state.history.insert(0, {"question": question, "response": response})
 
 def read_pdf(file):
     """Reads and extracts text from a PDF file."""
