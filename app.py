@@ -98,7 +98,7 @@ with st.form(key='question_form'):
 # Sidebar with an image
 with st.sidebar:
     try:
-        st.image("path_to_your_image.png", use_column_width=False, width=150)  # Adjust width as needed
+        st.image("DREJLOGO.png", use_column_width=False, width=150)  # Adjust width as needed
     except Exception as e:
         st.error(f"Error displaying image: {e}")
 
