@@ -10,7 +10,7 @@ import fitz  # PyMuPDF
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 # Function to load and generate responses
-model = genai.GenerativeModel("gemini-pro")
+model = genai.GenerativeModel("gemini-1.5-flash-001")
 
 def get_gemini_response(question, context=None):
     """Generates a response from the Gemini model with optional context."""
